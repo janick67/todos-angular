@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
-import { JwtModule } from '@auth0/angular-jwt';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,7 +11,8 @@ import { TodoItemComponent } from './components/todo-item/todo-item.component';
 import { HeaderComponent } from './components/layout/header/header.component';
 import { AddTodoComponent } from './components/add-todo/add-todo.component';
 import { AboutComponent } from './components/pages/about/about.component';
-import { LoginComponent } from './components/auth/login/login.component';
+//import { LoginComponent } from './components/auth/login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { JwtInterceptor, ErrorInterceptor, appInitializer } from './helpers';
 import { AuthenticationService } from './services/authentication.service';
 
@@ -30,15 +30,8 @@ import { AuthenticationService } from './services/authentication.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: function  tokenGetter() {
-             return     localStorage.getItem('accessToken');},
-             allowedDomains: ['localhost:3000'],
-             disallowedRoutes: ['http://localhost:3000/auth/login']
-      }
-    })
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthenticationService] },
