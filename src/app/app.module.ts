@@ -12,7 +12,7 @@ import { HeaderComponent } from './components/layout/header/header.component';
 import { AddTodoComponent } from './components/add-todo/add-todo.component';
 import { AboutComponent } from './components/pages/about/about.component';
 //import { LoginComponent } from './components/auth/login/login.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/auth/login/login.component';
 import { JwtInterceptor, ErrorInterceptor, appInitializer } from './helpers';
 import { AuthenticationService } from './services/authentication.service';
 

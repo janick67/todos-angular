@@ -37,17 +37,22 @@ export class AuthenticationService {
         this.stopRefreshTokenTimer();
         this.userSubject.next(null);
         this.router.navigate(['/login']);
+        localStorage.removeItem('user');
     }
 
     refreshToken() {
-        let user = JSON.parse(localStorage.getItem('user'));
+
         let refreshToken = null;
-        if (user !== null) refreshToken = user.refreshToken;
+        if (this.userValue !== null) refreshToken = this.userValue.refreshToken;
         return this.http.post<any>(`${environment.apiUrl}/auth/refresh`, {refreshToken: `Bearer ${refreshToken}`})
         .pipe(map((user) => {
             this.afterLoginOrRefresh(user);
             return user;
         }));
+    }
+
+    setUser(user) {
+        this.userSubject.next(user);
     }
 
     // helper methods
@@ -57,7 +62,6 @@ export class AuthenticationService {
         user.id = jwtToken.sub;
         user.role = jwtToken.rol;
         localStorage.setItem('user',JSON.stringify(user));
-        console.log('user:', user)
         this.userSubject.next(user);
         this.startRefreshTokenTimer();
     }
