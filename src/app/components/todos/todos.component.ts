@@ -10,6 +10,10 @@ import { Todo } from '../../models/Todo';
 })
 export class TodosComponent implements OnInit {
   todos:Todo[];
+  todosDone:Todo[];
+  todosUndone:Todo[];
+  todosDeleted:Todo[];
+  todosDoneAndUndone:Todo[];
 
   constructor(private todoService:TodoService) { }
 
@@ -17,23 +21,47 @@ export class TodosComponent implements OnInit {
     this.todoService.getTodos().subscribe(resp => {
       if (resp.err == null){
         this.todos = resp.res;
-        console.log(this.todos);
+        this.todos.forEach(el=>{
+          el.description = 'siema to jest jakiś długi opis, co o nim myślisz?'
+        })
+        this.filterTodo()
       }else{
         this.todos = null
+        console.log(resp.err)
       }
     });
   }
 
+  filterTodo(){
+    this.todosDone = this.todos.filter(todo => todo.done&&!todo.deleted)
+    this.todosUndone = this.todos.filter(todo => !todo.done&&!todo.deleted)
+    this.todosDeleted = this.todos.filter(todo => todo.deleted)
+    this.todosDoneAndUndone = this.todos.filter(todo => !todo.deleted)
+  }
+
+  changeTodo(){
+    this.filterTodo();
+  }
+
   deleteTodo(todo:Todo) {
-    // Remove From UI
-    this.todos = this.todos.filter(t => t.id !== todo.id);
-    // Remove from server
-    this.todoService.deleteTodo(todo).subscribe();
+    this.todoService.deleteTodo(todo).subscribe(resp => {// Remove from server
+      if (resp.err == null){
+        todo.deleted = true // Remove From UI
+        this.filterTodo();
+      }else{
+        console.log(resp.err)
+      }
+    });
   }
 
   addTodo(todo:Todo) {
-    this.todoService.addTodo(todo).subscribe(todo => {
-      this.todos.push(todo);
+    this.todoService.addTodo(todo).subscribe(resp => {
+      if (resp.err == null){
+        this.todos.push(resp.res);
+        this.filterTodo();
+      }else{
+        console.log(resp.err)
+      }
     });
   }
 

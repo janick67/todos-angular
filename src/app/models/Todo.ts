@@ -1,11 +1,13 @@
+import {Comment} from './Comment'
+
 export class Todo {
-  id:number;
+  _id:string;
   title:string;
   description:string;
   creatUser:number;
   doneUser:number;
   deletedUser:number;
-  comments:[];
+  comments:Comment[];
   done:boolean;
   deleted:boolean;
   createTime:Date;

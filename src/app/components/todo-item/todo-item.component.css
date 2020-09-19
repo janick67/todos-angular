@@ -27,27 +27,27 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: auto;
-  align-content: center
+  align-content: center;
 }
+
 .item {
   display: flex;
   flex: 1 0 auto;
   margin: 5px;
   align-items: center;
   justify-content: center;
-
-  &.small{
-    flex-grow: 1;
-  }
-
-  &.big{
-    flex-grow: 10;
-    max-width: 30%;
-  }
-  
-  &.medium{
-    max-width: 25%;
-    flex-grow: 5;
-  }
 }
 
+.item.small {
+  flex-grow: 1;
+}
+
+.item.big {
+  flex-grow: 10;
+  max-width: 30%;
+}
+
+.item.medium {
+  max-width: 25%;
+  flex-grow: 5;
+}

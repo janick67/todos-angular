@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Comments</h2>
+<mat-dialog-content class="mat-typography">
+
+    <p *ngFor="let comment of comments" >
+        {{comment.text}}, {{comment.createTime | date:'dd.MM.yyyy HH:mm'}}, {{comment.postedBy.email}}
+    </p>
+    <div class="new-comment">
+      <mat-form-field class="example-full-width">
+        <mat-label>Dodaj komentarz</mat-label>
+        <input matInput placeholder="Dodaj komentarz..." [(ngModel)]="newComment">
+      </mat-form-field>
+      <button mat-raised-button  [mat-dialog-close]="newComment" >Dodaj</button>
+    </div>
+</mat-dialog-content>

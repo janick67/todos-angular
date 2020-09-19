@@ -1,14 +1,33 @@
 <div [ngClass]="setClasses()">
-  <p>
-    <input
-      (change)="onToggle(todo)"
-      type="checkbox"
-      id="{{ todo.id }}"
-      [checked]="todo.done"
-    />
-    <label for="{{ todo.id }}">
-      {{ todo.title }}
-    </label>
-    <button (click)="onDelete(todo)" class="del">X</button>
-  </p>
+  <div class="container">
+        <div class="item small">
+          <input
+          (change)="onToggle(todo)"
+          type="checkbox"
+          id="{{ todo._id }}"
+          [checked]="todo.done"
+          [disabled]="todo.deleted"
+        /> 
+        </div>
+        <div class="item big">
+          <div class="tooltip">{{ todo.title }}
+            <span class="tooltiptext tooltipRight">{{ todo.description }}</span>
+          </div>
+        </div>
+        <div class="item medium">
+          <div class="tooltip date">{{ dayCount(todo.createTime) }}
+            <span class="tooltiptext tooltipLeft">{{ todo.createTime | date:'dd.MM.yyyy HH:mm' }}</span>
+          </div>
+        </div>
+        <div class="item small">
+          <span  class="material-icons" (click)="openDialog()">
+            comment
+            </span>
+        </div>
+        <div class="item small">
+          <span *ngIf="!todo.deleted" class="material-icons" (click)="onDelete(todo)">
+            delete
+            </span>
+        </div>
+</div>
 </div>
