@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddTodoComponent } from '../add-todo/add-todo.component';
 
 import { Todo } from '../../models/Todo';
 
@@ -15,15 +17,12 @@ export class TodosComponent implements OnInit {
   todosDeleted:Todo[];
   todosDoneAndUndone:Todo[];
 
-  constructor(private todoService:TodoService) { }
+  constructor(private todoService:TodoService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.todoService.getTodos().subscribe(resp => {
       if (resp.err == null){
         this.todos = resp.res;
-        this.todos.forEach(el=>{
-          el.description = 'siema to jest jakiś długi opis, co o nim myślisz?'
-        })
         this.filterTodo()
       }else{
         this.todos = null
@@ -33,13 +32,14 @@ export class TodosComponent implements OnInit {
   }
 
   filterTodo(){
+    console.log(this.todos)
     this.todosDone = this.todos.filter(todo => todo.done&&!todo.deleted)
     this.todosUndone = this.todos.filter(todo => !todo.done&&!todo.deleted)
     this.todosDeleted = this.todos.filter(todo => todo.deleted)
     this.todosDoneAndUndone = this.todos.filter(todo => !todo.deleted)
   }
 
-  changeTodo(){
+  changeTodo(){ 
     this.filterTodo();
   }
 
@@ -62,6 +62,14 @@ export class TodosComponent implements OnInit {
       }else{
         console.log(resp.err)
       }
+    });
+  }
+
+  addTodoDialog() {
+    const dialogRef = this.dialog.open(AddTodoComponent,{width:'90%', maxWidth:'90%'});
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      if (typeof result.title !== null && result.title.length > 0) this.addTodo(result);
     });
   }
 

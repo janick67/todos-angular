@@ -1,4 +1,18 @@
-<form class="form" (ngSubmit)="onSubmit()">
-  <input type="text" name="title" [(ngModel)]="title" placeholder="Add Todo...">
-  <input type="submit" value="Submit" class="btn">
-</form>
+<h2 mat-dialog-title>Dodaj nowy</h2>
+<mat-dialog-content class="mat-typography">
+  <!-- <form class="form" (ngSubmit)="onSubmit()">
+    <input type="text" name="title" [(ngModel)]="title" placeholder="Add Todo...">
+    <input type="submit" value="Submit" class="btn">
+  </form> -->
+  <mat-form-field appearance="legacy">
+    <mat-label>Tytuł</mat-label>
+    <input [(ngModel)]="title" matInput>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="legacy">
+    <mat-label>Opis</mat-label>
+    <textarea [(ngModel)]="description" matInput></textarea>
+  </mat-form-field>
+  <br>
+  <button style="float: right;" [mat-dialog-close]="{title: title,description: description}" mat-raised-button>Dodaj</button>
+</mat-dialog-content>

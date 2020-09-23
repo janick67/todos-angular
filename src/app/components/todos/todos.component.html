@@ -1,5 +1,4 @@
 <div>
-  <app-add-todo (addTodo)="addTodo($event)"></app-add-todo>
   <mat-tab-group>
     <mat-tab label="Do zrobienia"> 
       <app-todo-item 
@@ -38,4 +37,9 @@
       </app-todo-item>
     </mat-tab>
   </mat-tab-group>
+    <button mat-fab color="primary" class="fixedbutton" (click)="addTodoDialog()">
+      <span  class="material-icons" >
+      add
+      </span>
+    </button>
 </div>

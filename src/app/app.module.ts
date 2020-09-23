@@ -23,12 +23,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
-
-
-
-
-
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { MenuComponent } from './components/layout/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -38,8 +34,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     HeaderComponent,
     AddTodoComponent,
     AboutComponent,
-    LoginComponent,
-    TodoCommentComponent
+    LoginComponent, 
+    TodoCommentComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -54,8 +51,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatDialogModule,
     MatButtonModule,
     MatInputModule,
-    MatFormFieldModule
-  ],
+    MatFormFieldModule,
+    MatToolbarModule
+  ], 
   providers: [
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthenticationService] },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
