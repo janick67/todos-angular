@@ -25,6 +25,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MenuComponent } from './components/layout/menu/menu.component';
+import {MatCardModule} from '@angular/material/card';
+import { RegisterComponent } from './components/auth/register/register.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +39,8 @@ import { MenuComponent } from './components/layout/menu/menu.component';
     AboutComponent,
     LoginComponent, 
     TodoCommentComponent,
-    MenuComponent
+    MenuComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +56,8 @@ import { MenuComponent } from './components/layout/menu/menu.component';
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCardModule
   ], 
   providers: [
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthenticationService] },

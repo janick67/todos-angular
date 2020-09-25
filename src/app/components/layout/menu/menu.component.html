@@ -6,9 +6,17 @@
     </button>
     <span>Todolist</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button (click)="logout()">
+    <button *ngIf="!isLoged()" mat-button (click)="login()">
+       Login
+    </button>
+    <button *ngIf="!isLoged()" mat-button (click)="register()">
+        Register
+    </button>
+    <button *ngIf="isLoged()" mat-icon-button (click)="logout()">
         <span  class="material-icons" >
             exit_to_app
         </span>
     </button>
+
+
   </mat-toolbar>

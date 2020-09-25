@@ -24,10 +24,19 @@ export class AuthenticationService {
         return this.userSubject.value;
     }
 
-    login(email: string, password: string) {
-        return this.http.post<any>(`${environment.apiUrl}/auth/login`, { email, password })
+    login(login: string, password: string) {
+        return this.http.post<any>(`${environment.apiUrl}/auth/login`, { login, password })
             .pipe(map(user => {
                 this.afterLoginOrRefresh(user);
+                return user;
+            }));
+    }
+
+    
+    register(person:object) {
+        return this.http.post<any>(`${environment.apiUrl}/auth/register`, person)
+            .pipe(map(user => {
+                console.log(user);
                 return user;
             }));
     }
@@ -64,6 +73,12 @@ export class AuthenticationService {
         localStorage.setItem('user',JSON.stringify(user));
         this.userSubject.next(user);
         this.startRefreshTokenTimer();
+    }
+
+    public isLoged(){
+        let user = localStorage.getItem('user');
+        if (typeof user == 'undefined' || user == null) return false;
+        return user.length > 0;
     }
 
     private refreshTokenTimeout;

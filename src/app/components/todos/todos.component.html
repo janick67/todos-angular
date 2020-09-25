@@ -9,7 +9,7 @@
       >
       </app-todo-item>
     </mat-tab>
-    <mat-tab label="Zrobione"> 
+    <!-- <mat-tab label="Zrobione"> 
       <app-todo-item 
       *ngFor="let todo of todosDone" 
       [todo]="todo"
@@ -17,7 +17,7 @@
       (changeTodo)="changeTodo()"
       >
       </app-todo-item>
-    </mat-tab>
+    </mat-tab> -->
     <mat-tab label="Wszystkie"> 
       <app-todo-item 
       *ngFor="let todo of todosDoneAndUndone" 
